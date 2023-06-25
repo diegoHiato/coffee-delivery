@@ -52,7 +52,7 @@ export const Cart = styled.button`
   }
 `
 
-export const Actions = styled.div`
+export const Actions = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
