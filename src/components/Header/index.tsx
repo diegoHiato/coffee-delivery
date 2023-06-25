@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import Logo from '../../assets/full-logo.svg'
 import { openWeatherAPI } from '../../services/openWeatherAPI'
 import { Actions, Cart, HeaderContainer, Location } from './styles'
@@ -66,16 +67,20 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <img src={Logo} alt="Coffee Delivery" />
+      <NavLink to="/" title="Cardápio">
+        <img src={Logo} alt="Coffee Delivery" />
+      </NavLink>
       <Actions>
         <Location>
           <MapPin weight="fill" size={22} />
           {currentLocation}
         </Location>
-        <Cart>
-          <span>{'3'}</span>
-          <ShoppingCart weight="fill" size={22} />
-        </Cart>
+        <NavLink to="/checkout" title="Carrinho">
+          <Cart>
+            <span>{'3'}</span>
+            <ShoppingCart weight="fill" size={22} />
+          </Cart>
+        </NavLink>
       </Actions>
     </HeaderContainer>
   )

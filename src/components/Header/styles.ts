@@ -65,4 +65,13 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & > a {
+    padding: 0.5rem;
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `
