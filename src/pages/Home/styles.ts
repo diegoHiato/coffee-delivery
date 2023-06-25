@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { TitleL } from '../../styles/typography'
 
 export const MenuContent = styled.div`
   display: grid;
@@ -8,13 +9,11 @@ export const MenuContent = styled.div`
 `
 
 export const MenuContainer = styled.div`
-  & > h1 {
-    margin-bottom: 3.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.375rem;
 
-    font-family: 'Baloo 2', cursive;
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 130%;
+  & > ${TitleL} {
     color: ${(props) => props.theme['base-subtitle']};
   }
 `

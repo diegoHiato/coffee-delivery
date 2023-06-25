@@ -1,10 +1,10 @@
 import { IconProps } from 'phosphor-react'
 import { ForwardRefExoticComponent, RefAttributes } from 'react'
-import { IconContainer } from './styles'
+import { BackgroundColor, IconContainer } from './styles'
 
 interface IntroIconProps extends IconProps {
   Icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
-  backgroundColor: string
+  backgroundColor: BackgroundColor['$background']
 }
 
 export const IntroIcon = ({

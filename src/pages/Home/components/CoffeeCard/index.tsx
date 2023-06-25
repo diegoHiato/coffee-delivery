@@ -2,6 +2,13 @@ import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
 import Coffee from '../../../../assets/menu/american.png'
 import {
+  TagText,
+  TextM,
+  TextS,
+  TitleM,
+  TitleS,
+} from '../../../../styles/typography'
+import {
   AddToCartButton,
   CartActions,
   CoffeCardContent,
@@ -33,19 +40,20 @@ export const CoffeeCard = () => {
         <img src={Coffee} alt="" />
 
         <TagContainer>
-          <CoffeeTag>Tradicional</CoffeeTag>
-          <CoffeeTag>Gelado</CoffeeTag>
+          <CoffeeTag>
+            <TagText>Tradicional</TagText>
+          </CoffeeTag>
         </TagContainer>
 
         <CoffeeDescription>
-          <h2>Expresso Americano</h2>
-          <span>Expresso diluído, menos intenso que o tradicional</span>
+          <TitleS>Expresso Americano</TitleS>
+          <TextS>Expresso diluído, menos intenso que o tradicional</TextS>
         </CoffeeDescription>
 
         <PriceAndCartActions>
           <Price>
-            <span>R$</span>
-            <span>{'9,90'}</span>
+            <TextS>R$</TextS>
+            <TitleM>{'9,90'}</TitleM>
           </Price>
 
           <CartActions>
@@ -53,7 +61,7 @@ export const CoffeeCard = () => {
               <button disabled={amount <= 1}>
                 <Minus size={14} weight="bold" onClick={handleMinus} />
               </button>
-              <span>{amount}</span>
+              <TextM>{amount}</TextM>
               <button>
                 <Plus size={14} weight="bold" onClick={handlePlus} />
               </button>

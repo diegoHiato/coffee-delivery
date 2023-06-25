@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { TagText, TextM, TextS, TitleS } from '../../../../styles/typography'
 
 export const AddToCartButton = styled.button`
   padding: 0.5rem;
@@ -60,7 +61,7 @@ export const CoffeeAmount = styled.div`
     }
   }
 
-  & > span {
+  & > ${TextM} {
     color: ${(props) => props.theme['base-title']};
     user-select: none;
   }
@@ -76,17 +77,7 @@ export const Price = styled.div`
   align-items: first baseline;
   gap: 0.25rem;
 
-  & > span:first-of-type {
-    font-size: 0.875rem;
-    line-height: 130%;
-  }
-
-  & > span:last-of-type {
-    font-size: 1.5rem;
-    font-family: 'Baloo 2', cursive;
-    font-weight: 700;
-    line-height: 130%;
-  }
+  color: ${(props) => props.theme['base-text']};
 `
 
 export const PriceAndCartActions = styled.div`
@@ -108,41 +99,34 @@ export const CoffeeDescription = styled.div`
   justify-content: center;
   gap: 0.5rem;
 
-  & > h2 {
-    font-size: 1.25rem;
-    font-family: 'Baloo 2', cursive;
-    font-weight: 700;
-    line-height: 130%;
-
+  & > ${TitleS} {
+    text-align: center;
     text-transform: capitalize;
+    color: ${(props) => props.theme['base-subtitle']};
   }
 
-  & > span {
+  & > ${TextS} {
     text-align: center;
     padding-inline: 1.25rem;
-
-    font-size: 0.875rem;
-    line-height: 130%;
 
     color: ${(props) => props.theme['base-label']};
   }
 `
 
-export const CoffeeTag = styled.span`
+export const CoffeeTag = styled.div`
   padding: 0.25rem 0.5rem;
 
-  font-size: 0.625rem;
-  font-weight: 700;
-  line-height: 130%;
-  text-transform: uppercase;
-
   border-radius: 100px;
-  color: ${(props) => props.theme['yellow-dark']};
   background-color: ${(props) => props.theme['yellow-light']};
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & > ${TagText} {
+    color: ${(props) => props.theme['yellow-dark']};
+    text-transform: uppercase;
+  }
 `
 
 export const TagContainer = styled.div`

@@ -13,9 +13,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font-size: 1rem;
-    font-weight: 400;
+    line-height: 130%;
     font-family: 'Roboto', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Baloo 2', cursive;
+    line-height: 130%;
   }
   
   :focus {

@@ -1,3 +1,4 @@
+import { TitleL } from '../../styles/typography'
 import { CoffeeCard } from './components/CoffeeCard'
 import { Intro } from './components/Intro'
 import { HomeContainer, MenuContainer, MenuContent } from './styles'
@@ -7,7 +8,7 @@ export function Home() {
     <HomeContainer>
       <Intro />
       <MenuContainer>
-        <h1>{'Nossos cafés'}</h1>
+        <TitleL>Nossos cafés</TitleL>
         <MenuContent>
           <CoffeeCard />
         </MenuContent>

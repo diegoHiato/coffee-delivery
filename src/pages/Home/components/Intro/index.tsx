@@ -1,5 +1,6 @@
 import { Coffee, IconProps, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { ForwardRefExoticComponent, RefAttributes } from 'react'
+import { TextL, TextM, TitleXL } from '../../../../styles/typography'
 import { IntroIcon } from './Icon'
 import {
   Background,
@@ -52,8 +53,8 @@ export function Intro() {
       <Background />
       <section>
         <TitleContainer>
-          <h2>{titleText}</h2>
-          <p>{subtitleText}</p>
+          <TitleXL>{titleText}</TitleXL>
+          <TextL>{subtitleText}</TextL>
         </TitleContainer>
 
         <IconWithDescriptionContainter>
@@ -65,7 +66,7 @@ export function Intro() {
                   backgroundColor={item.iconBackgroundColor}
                   weight={item.weight}
                 />
-                <span>{item.description}</span>
+                <TextM>{item.description}</TextM>
               </IconWithDescriptionContent>
             )
           })}

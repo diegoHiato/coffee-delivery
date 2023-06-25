@@ -1,4 +1,5 @@
 import styled, { DefaultTheme } from 'styled-components'
+import { TextL, TextM, TitleXL } from '../../../../styles/typography'
 
 export interface BackgroundColor {
   $background: keyof Pick<
@@ -39,20 +40,11 @@ export const TitleContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  & > h2 {
-    font-family: 'Baloo 2', cursive;
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 130%;
-
+  & > ${TitleXL} {
     color: ${(props) => props.theme['base-title']};
   }
 
-  & > p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 130%;
-
+  & > ${TextL} {
     color: ${(props) => props.theme['base-text']};
   }
 `
@@ -63,8 +55,8 @@ export const IconWithDescriptionContent = styled.div`
   justify-content: flex-start;
   gap: 0.75rem;
 
-  & > span {
-    font-size: 1rem;
+  & > ${TextM} {
+    color: ${(props) => props.theme['base-text']};
   }
 `
 
