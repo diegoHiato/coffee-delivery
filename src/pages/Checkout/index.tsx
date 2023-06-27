@@ -18,6 +18,7 @@ const checkoutValidationSchema = zod.object({
     city: zod.string().min(1, 'Campo obrigatório'),
     state: zod.string().min(1, 'Campo obrigatório'),
   }),
+  paymentMethod: zod.string().min(1, 'Campo obrigatório'),
 })
 
 export type CheckoutFormData = zod.infer<typeof checkoutValidationSchema>

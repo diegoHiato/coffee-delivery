@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
-import { TextM, TextS } from '../../../../styles/typography'
+import { ButtonSmallText, TextM, TextS } from '../../../../styles/typography'
 
 const BaseCardContainer = styled.div`
   padding: 2.5rem;
   border-radius: 6px;
   background-color: ${(props) => props.theme['base-card']};
+  border: 1px solid transparent;
 
   display: flex;
   flex-direction: column;
@@ -34,7 +35,8 @@ export const InputContainer = styled.div<{ $error: boolean }>`
     padding: 1rem;
 
     border: 1px solid
-      ${(props) => (props.$error ? 'red' : props.theme['base-button'])};
+      ${(props) =>
+        props.$error ? props.theme['red-500'] : props.theme['base-button']};
     border-radius: 6px;
     background-color: ${(props) => props.theme['base-input']};
 
@@ -65,7 +67,8 @@ export const InputContainer = styled.div<{ $error: boolean }>`
     }
 
     &::placeholder {
-      color: ${(props) => (props.$error ? 'red' : props.theme['base-label'])};
+      color: ${(props) =>
+        props.$error ? props.theme['red-500'] : props.theme['base-label']};
     }
   }
 `
@@ -85,7 +88,81 @@ export const CardTitleContainer = styled.div`
   }
 `
 
-export const PaymentMethodCardContainer = styled(BaseCardContainer)`
+export const PaymentMethodInput = styled.div<{ $checked: boolean }>`
+  padding: 1rem;
+
+  background-color: ${(props) =>
+    props.$checked ? props.theme['purple-light'] : props.theme['base-button']};
+  border-radius: 6px;
+
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+
+  cursor: ${(props) => (props.$checked ? 'default' : 'pointer')};
+  transition: background-color 0.15s, border-color 0.15s;
+
+  ${(props) => css`
+    border: ${props.$checked
+      ? `1px solid ${props.theme.purple}`
+      : '1px solid transparent'};
+  `}
+
+  & > input {
+    appearance: none;
+  }
+
+  & > label {
+    display: flex;
+    gap: 0.75rem;
+
+    cursor: ${(props) => (props.$checked ? 'default' : 'pointer')};
+    user-select: none;
+
+    & > svg {
+      color: ${(props) => props.theme.purple};
+    }
+
+    & > ${ButtonSmallText} {
+      transition: color 0.15s;
+      color: ${(props) => props.theme['base-text']};
+    }
+  }
+
+  &:hover {
+    ${(props) =>
+      !props.$checked &&
+      css`
+        background-color: ${(props) => props.theme['base-hover']};
+        & > label > ${ButtonSmallText} {
+          color: ${(props) => props.theme['base-subtitle']};
+        }
+      `}
+  }
+
+  & > input:checked {
+    background-color: ${(props) => props.theme['purple-light']};
+  }
+
+  & > input:focus {
+    box-shadow: none;
+  }
+`
+
+export const PaymentMethodContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+`
+
+// eslint-disable-next-line prettier/prettier
+export const PaymentMethodCardContainer = styled(BaseCardContainer)<{ $error: boolean }>`
+  border: ${(props) =>
+    props.$error
+      ? `1px solid ${props.theme['red-500']}`
+      : '1px solid transparent'};
+
   & > ${CardTitleContainer} > div {
     color: ${(props) => props.theme.purple};
   }
@@ -108,6 +185,12 @@ export const AddressFormContainer = styled.section`
 
   & > div:nth-child(4) {
     grid-column: 2 / 4;
+  }
+
+  & > div:last-child {
+    & > input {
+      text-transform: uppercase;
+    }
   }
 `
 

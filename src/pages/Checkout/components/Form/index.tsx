@@ -1,9 +1,20 @@
-import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from 'phosphor-react'
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { CheckoutFormData } from '../..'
 import { viaCepAPI } from '../../../../services/viaCepAPI'
-import { TextM, TextS, TitleXS } from '../../../../styles/typography'
+import {
+  ButtonSmallText,
+  TextM,
+  TextS,
+  TitleXS,
+} from '../../../../styles/typography'
 import { Input } from './Input'
 import { MaskedInput } from './MaskedInput'
 import {
@@ -12,6 +23,8 @@ import {
   CardTitleContainer,
   CheckoutFormContainer,
   PaymentMethodCardContainer,
+  PaymentMethodContent,
+  PaymentMethodInput,
 } from './styles'
 
 interface ViaCepResponse {
@@ -33,6 +46,8 @@ export const CheckoutForm = () => {
     useFormContext<CheckoutFormData>()
   const cepInputValue = watch('address.cep')?.replace(/[^0-9]/g, '')
   const isCepInputFullfilled = cepInputValue?.length === 8
+  const paymentMethodInputValue = watch('paymentMethod')
+  const isPaymentMethodSelected = !formState.errors.paymentMethod
 
   useEffect(() => {
     if (cepInputValue?.length === 8) {
@@ -125,12 +140,13 @@ export const CheckoutForm = () => {
               placeholder="UF"
               error={formState.errors.address?.state}
               disabled={!isCepInputFullfilled}
+              maxLength={2}
               {...register('address.state')}
             />
           </AddressFormContainer>
         </AddressCardContainer>
 
-        <PaymentMethodCardContainer>
+        <PaymentMethodCardContainer $error={!isPaymentMethodSelected}>
           <CardTitleContainer>
             <div>
               <CurrencyDollar size={22} />
@@ -145,7 +161,70 @@ export const CheckoutForm = () => {
             </div>
           </CardTitleContainer>
 
-          <div></div>
+          <PaymentMethodContent>
+            <PaymentMethodInput
+              onClick={() => {
+                if (paymentMethodInputValue !== 'creditCard') {
+                  setValue('paymentMethod', 'creditCard')
+                }
+                clearErrors('paymentMethod')
+              }}
+              $checked={paymentMethodInputValue === 'creditCard'}
+            >
+              <input
+                type="radio"
+                id="creditCard"
+                value={'creditCard'}
+                {...register('paymentMethod')}
+              />
+              <label htmlFor="creditCard">
+                <CreditCard size={16} />
+                <ButtonSmallText>{'Cartão de Crédito'}</ButtonSmallText>
+              </label>
+            </PaymentMethodInput>
+
+            <PaymentMethodInput
+              onClick={() => {
+                if (paymentMethodInputValue !== 'debitCard') {
+                  setValue('paymentMethod', 'debitCard')
+                }
+                clearErrors('paymentMethod')
+              }}
+              $checked={paymentMethodInputValue === 'debitCard'}
+            >
+              <input
+                type="radio"
+                id="debitCard"
+                value={'debitCard'}
+                {...register('paymentMethod')}
+              />
+              <label htmlFor="debitCard">
+                <Bank size={16} />
+                <ButtonSmallText>{'Cartão de Débito'}</ButtonSmallText>
+              </label>
+            </PaymentMethodInput>
+
+            <PaymentMethodInput
+              onClick={() => {
+                if (paymentMethodInputValue !== 'cash') {
+                  setValue('paymentMethod', 'cash')
+                }
+                clearErrors('paymentMethod')
+              }}
+              $checked={paymentMethodInputValue === 'cash'}
+            >
+              <input
+                type="radio"
+                id="cash"
+                value={'cash'}
+                {...register('paymentMethod')}
+              />
+              <label htmlFor="cash">
+                <Money size={16} />
+                <ButtonSmallText>{'Dinheiro'}</ButtonSmallText>
+              </label>
+            </PaymentMethodInput>
+          </PaymentMethodContent>
         </PaymentMethodCardContainer>
       </section>
     </CheckoutFormContainer>

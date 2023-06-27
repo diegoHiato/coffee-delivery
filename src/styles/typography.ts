@@ -61,3 +61,9 @@ export const ButtonRegularText = styled.span`
   line-height: 160%;
   font-weight: 400;
 `
+
+export const ButtonSmallText = styled.span`
+  font-size: 0.75rem;
+  line-height: 160%;
+  text-transform: uppercase;
+`
