@@ -14,15 +14,30 @@ import {
   PaymentMethodCardContainer,
 } from './styles'
 
+interface ViaCepResponse {
+  cep: string
+  logradouro: string
+  complemento: string
+  bairro: string
+  localidade: string
+  uf: string
+  ibge: string
+  gia: string
+  ddd: string
+  siafi: string
+  erro?: string
+}
+
 export const CheckoutForm = () => {
   const { register, formState, watch, setError, clearErrors, setValue } =
     useFormContext<CheckoutFormData>()
   const cepInputValue = watch('address.cep')?.replace(/[^0-9]/g, '')
+  const isCepInputFullfilled = cepInputValue?.length === 8
 
   useEffect(() => {
     if (cepInputValue?.length === 8) {
       viaCepAPI
-        .get(`${cepInputValue}/json`)
+        .get<ViaCepResponse>(`${cepInputValue}/json`)
         .then((response) => {
           const { erro, logradouro, bairro, localidade, uf } = response.data
           if (erro) throw new Error('CEP Inválido')
@@ -67,7 +82,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="Rua"
               error={formState.errors.address?.street}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.street')}
             />
 
@@ -76,7 +91,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="Número"
               error={formState.errors.address?.streetNumber}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.streetNumber')}
             />
 
@@ -85,7 +100,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="Complemento"
               error={formState.errors.address?.complement}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.complement')}
             />
 
@@ -93,7 +108,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="Bairro"
               error={formState.errors.address?.neighborhood}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.neighborhood')}
             />
 
@@ -101,7 +116,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="Cidade"
               error={formState.errors.address?.city}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.city')}
             />
 
@@ -109,7 +124,7 @@ export const CheckoutForm = () => {
               type="text"
               placeholder="UF"
               error={formState.errors.address?.state}
-              disabled={cepInputValue?.length !== 8}
+              disabled={!isCepInputFullfilled}
               {...register('address.state')}
             />
           </AddressFormContainer>
