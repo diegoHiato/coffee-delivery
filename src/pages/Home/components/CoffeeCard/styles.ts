@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { TagText, TextM, TextS, TitleS } from '../../../../styles/typography'
+import { TagText, TextS, TitleS } from '../../../../styles/typography'
 
 export const AddToCartButton = styled.button`
   padding: 0.5rem;
@@ -18,52 +18,6 @@ export const AddToCartButton = styled.button`
   transition: background-color 0.2s;
   &:hover {
     background-color: ${(props) => props.theme.purple};
-  }
-`
-
-export const CoffeeAmount = styled.div`
-  padding: 0.5rem;
-
-  border-radius: 6px;
-  background-color: ${(props) => props.theme['base-button']};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  & > button {
-    border: 0;
-    border-radius: 2px;
-    background: transparent;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-
-    & > svg {
-      color: ${(props) => props.theme.purple};
-      transition: color 0.15s;
-    }
-
-    &:not(:disabled) {
-      & > svg:hover {
-        color: ${(props) => props.theme['purple-dark']};
-      }
-    }
-
-    transition: opacity 0.15s;
-    &:disabled {
-      opacity: 0.25;
-      cursor: not-allowed;
-    }
-  }
-
-  & > ${TextM} {
-    color: ${(props) => props.theme['base-title']};
-    user-select: none;
   }
 `
 

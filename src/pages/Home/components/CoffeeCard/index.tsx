@@ -1,18 +1,12 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
 import Coffee from '../../../../assets/menu/american.png'
-import {
-  TagText,
-  TextM,
-  TextS,
-  TitleM,
-  TitleS,
-} from '../../../../styles/typography'
+import { CoffeeCounter } from '../../../../components/CoffeeCounter'
+import { TagText, TextS, TitleM, TitleS } from '../../../../styles/typography'
 import {
   AddToCartButton,
   CartActions,
   CoffeCardContent,
-  CoffeeAmount,
   CoffeeCardContainer,
   CoffeeDescription,
   CoffeeTag,
@@ -23,16 +17,6 @@ import {
 
 export const CoffeeCard = () => {
   const [amount, setAmount] = useState(1)
-
-  function handleMinus() {
-    if (amount > 1) {
-      setAmount((prev) => prev - 1)
-    }
-  }
-
-  function handlePlus() {
-    setAmount((prev) => prev + 1)
-  }
 
   return (
     <CoffeeCardContainer>
@@ -57,15 +41,10 @@ export const CoffeeCard = () => {
           </Price>
 
           <CartActions>
-            <CoffeeAmount>
-              <button disabled={amount <= 1}>
-                <Minus size={14} weight="bold" onClick={handleMinus} />
-              </button>
-              <TextM>{amount}</TextM>
-              <button>
-                <Plus size={14} weight="bold" onClick={handlePlus} />
-              </button>
-            </CoffeeAmount>
+            <CoffeeCounter
+              counter={amount}
+              counterDispatchFunction={setAmount}
+            />
 
             <AddToCartButton>
               <ShoppingCart weight="fill" size={22} />
