@@ -48,6 +48,7 @@ export const CheckoutForm = () => {
   const isCepInputFullfilled = cepInputValue?.length === 8
   const paymentMethodInputValue = watch('paymentMethod')
   const isPaymentMethodSelected = !formState.errors.paymentMethod
+  const hasErrorOnAddressForm = !!formState.errors.address
 
   useEffect(() => {
     if (cepInputValue?.length === 8) {
@@ -72,7 +73,7 @@ export const CheckoutForm = () => {
     <CheckoutFormContainer>
       <TitleXS>{'Complete seu pedido'}</TitleXS>
       <section>
-        <AddressCardContainer>
+        <AddressCardContainer $error={hasErrorOnAddressForm}>
           <CardTitleContainer>
             <div>
               <MapPinLine size={22} />

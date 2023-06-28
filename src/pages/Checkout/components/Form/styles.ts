@@ -194,7 +194,13 @@ export const AddressFormContainer = styled.section`
   }
 `
 
-export const AddressCardContainer = styled(BaseCardContainer)`
+// eslint-disable-next-line prettier/prettier
+export const AddressCardContainer = styled(BaseCardContainer)<{$error: boolean}>`
+  border: ${(props) =>
+    props.$error
+      ? `1px solid ${props.theme['red-500']}`
+      : '1px solid transparent'};
+
   & > ${CardTitleContainer} > div {
     color: ${(props) => props.theme['yellow-dark']};
   }
