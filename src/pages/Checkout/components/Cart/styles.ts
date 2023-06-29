@@ -57,6 +57,11 @@ export const CartCoffeeCardContainer = styled.div`
     align-items: center;
     gap: 1.25rem;
 
+    & > img {
+      width: 4rem;
+      height: 4rem;
+    }
+
     & > div {
       & > ${TextM} {
         width: 100%;
