@@ -1,10 +1,11 @@
 import { Coffee, IconProps, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { ForwardRefExoticComponent, RefAttributes } from 'react'
+import { DefaultTheme } from 'styled-components'
+import { RoundedIcon } from '../../../../components/RoundedIcon'
+import { defaultTheme } from '../../../../styles/themes/default'
 import { TextL, TextM, TitleXL } from '../../../../styles/typography'
-import { IntroIcon } from './Icon'
 import {
   Background,
-  BackgroundColor,
   HeroImage,
   IconWithDescriptionContainter,
   IconWithDescriptionContent,
@@ -18,7 +19,7 @@ const subtitleText =
 const iconAndDescription: {
   icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
   description: string
-  iconBackgroundColor: BackgroundColor['$background']
+  iconBackgroundColor: string
   weight?: IconProps['weight']
 }[] = [
   {
@@ -61,9 +62,14 @@ export function Intro() {
           {iconAndDescription.map((item, index) => {
             return (
               <IconWithDescriptionContent key={index}>
-                <IntroIcon
+                <RoundedIcon
                   Icon={item.icon}
-                  backgroundColor={item.iconBackgroundColor}
+                  iconColor={`${defaultTheme.background}`}
+                  backgroundColor={`${
+                    defaultTheme[
+                      `${item.iconBackgroundColor as keyof DefaultTheme}`
+                    ]
+                  }`}
                   weight={item.weight}
                 />
                 <TextM>{item.description}</TextM>

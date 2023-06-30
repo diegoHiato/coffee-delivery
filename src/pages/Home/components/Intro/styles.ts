@@ -1,25 +1,9 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
+import {
+  IntroBackgroundImageUrl,
+  IntroHeroImageUrl,
+} from '../../../../../envrionmentVariables'
 import { TextL, TextM, TitleXL } from '../../../../styles/typography'
-
-export interface BackgroundColor {
-  $background: keyof Pick<
-    DefaultTheme,
-    'yellow' | 'yellow-dark' | 'purple' | 'base-text'
-  >
-}
-
-export const IconContainer = styled.div<BackgroundColor>`
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-
-  color: ${(props) => props.theme.background};
-  background-color: ${(props) => props.theme[`${props.$background}`]};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
 
 export const Background = styled.div`
   position: absolute;
@@ -27,7 +11,7 @@ export const Background = styled.div`
   height: 100%;
 
   filter: blur(80px);
-  background-image: url('intro-background.png');
+  background-image: url(${IntroBackgroundImageUrl});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -74,7 +58,7 @@ export const HeroImage = styled.section`
   width: 29.75rem;
   height: 22.5rem;
 
-  background-image: url('intro-image.png');
+  background-image: url(${IntroHeroImageUrl});
   background-size: contain;
   background-repeat: no-repeat;
 `
