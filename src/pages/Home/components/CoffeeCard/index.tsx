@@ -1,7 +1,8 @@
 import { ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
-import Coffee from '../../../../assets/menu/american.png'
 import { CoffeeCounter } from '../../../../components/CoffeeCounter'
+import { Coffee } from '../../../../contexts/Cart/Context'
+import { useCart } from '../../../../contexts/Hooks/useCart'
 import { TagText, TextS, TitleM, TitleS } from '../../../../styles/typography'
 import {
   AddToCartButton,
@@ -15,29 +16,41 @@ import {
   TagContainer,
 } from './styles'
 
-export const CoffeeCard = () => {
+interface CoffeeCardProps {
+  coffee: Coffee
+}
+
+export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
+  const { addCoffeeToCart } = useCart()
   const [amount, setAmount] = useState(1)
+  const [dollar, cents] = String(coffee.price).split('.')
+  const paddedCents = cents.padEnd(2, '0')
+  const formattedPrice = `${dollar},${paddedCents}`
 
   return (
     <CoffeeCardContainer>
       <CoffeCardContent>
-        <img src={Coffee} alt="" />
+        <img src={coffee.imageUrl} alt="" />
 
         <TagContainer>
-          <CoffeeTag>
-            <TagText>Tradicional</TagText>
-          </CoffeeTag>
+          {coffee.tags.map((tag, index) => {
+            return (
+              <CoffeeTag key={`${index}_${tag}`}>
+                <TagText>{tag}</TagText>
+              </CoffeeTag>
+            )
+          })}
         </TagContainer>
 
         <CoffeeDescription>
-          <TitleS>Expresso Americano</TitleS>
-          <TextS>Expresso diluído, menos intenso que o tradicional</TextS>
+          <TitleS>{coffee.title}</TitleS>
+          <TextS>{coffee.description}</TextS>
         </CoffeeDescription>
 
         <PriceAndCartActions>
           <Price>
             <TextS>R$</TextS>
-            <TitleM>{'9,90'}</TitleM>
+            <TitleM>{formattedPrice}</TitleM>
           </Price>
 
           <CartActions>
@@ -46,7 +59,11 @@ export const CoffeeCard = () => {
               counterDispatchFunction={setAmount}
             />
 
-            <AddToCartButton>
+            <AddToCartButton
+              onClick={() => {
+                addCoffeeToCart({ coffee, amount })
+              }}
+            >
               <ShoppingCart weight="fill" size={22} />
             </AddToCartButton>
           </CartActions>
