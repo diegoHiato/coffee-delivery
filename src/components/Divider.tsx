@@ -9,13 +9,6 @@ interface DividerProps {
   spacing?: number
 }
 
-/**
- * Receive a spacing in rem to TOP and BOTTOM margins
- *
- * Default: 1.5
- *
- * @param spacing
- */
 export const Divider = ({ spacing = 1.5, ...rest }: DividerProps) => {
   return <HrElement $spacing={spacing} {...rest} />
 }

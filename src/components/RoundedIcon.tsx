@@ -28,22 +28,6 @@ const IconContainer = styled.div<DivElementProps>`
   justify-content: center;
 `
 
-/**
- * Show a Icon with rounded background
- *
- * @requires Icon component, background color (for div) and color (for icon)
- *
- * Can receive a value in rem for the background size
- *
- * Both colors receive a native CSS structure
- *
- * I.E: '#FFF' or 'rgba(255,255,255,1);
- *
- * @property Icon
- * @property iconColor
- * @property backgroundColor
- * @property backgroundSize | Optional (Default: 1.5)
- */
 export const RoundedIcon = ({
   Icon,
   iconColor,
