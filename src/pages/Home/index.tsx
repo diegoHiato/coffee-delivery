@@ -12,7 +12,6 @@ const fakeApiResponse: Coffee[] = [
     description: 'Expresso diluído, menos intenso que o tradicional',
     price: 9.9,
     tags: ['tradicional'],
-    amountInCart: 0,
   },
   {
     id: '1731e81a-5260-4f80-a85c-1770afa82cf2',
@@ -21,7 +20,6 @@ const fakeApiResponse: Coffee[] = [
     description: 'O tradicional café feito com água quente e grãos moídos',
     price: 8.75,
     tags: ['tradicional'],
-    amountInCart: 0,
   },
 ]
 
