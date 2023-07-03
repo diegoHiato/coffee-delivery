@@ -18,6 +18,7 @@ export interface AddToCartData {
 interface CartContextType {
   coffeeList: Coffee[]
   totalCoffeeUnitsInCart: number
+  valueOfItemsInCart: number
   addCoffeeToCart: ({ coffee, amount }: AddToCartData) => void
 }
 

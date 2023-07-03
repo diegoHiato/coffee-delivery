@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { freightBaseCost } from '../../../../../envrionmentVariables'
 import { Divider } from '../../../../components/Divider'
 import { useCart } from '../../../../contexts/Hooks/useCart'
 import {
@@ -8,6 +9,7 @@ import {
   TextS,
   TitleXS,
 } from '../../../../styles/typography'
+import { getFormattedPriceValue } from '../../../../utils/getFormattedPriceValue'
 import { CartCoffee } from './CartCoffee'
 import {
   CartContainer,
@@ -17,7 +19,8 @@ import {
 } from './styles'
 
 export const CheckoutCart = () => {
-  const { coffeeList } = useCart()
+  const { coffeeList, valueOfItemsInCart } = useCart()
+  const totalCartValue = freightBaseCost + valueOfItemsInCart
 
   return (
     <CartContainer>
@@ -37,17 +40,17 @@ export const CheckoutCart = () => {
         <PriceInformationContainer>
           <div>
             <TextS>{'Total de itens'}</TextS>
-            <TextM>{'R$ 29,70'}</TextM>
+            <TextM>{getFormattedPriceValue(valueOfItemsInCart)}</TextM>
           </div>
 
           <div>
             <TextS>{'Frete'}</TextS>
-            <TextM>{'R$ 3,50'}</TextM>
+            <TextM>{getFormattedPriceValue(freightBaseCost)}</TextM>
           </div>
 
           <div>
             <TextL>{'Total'}</TextL>
-            <TextL>{'R$ 33,20'}</TextL>
+            <TextL>{getFormattedPriceValue(totalCartValue)}</TextL>
           </div>
         </PriceInformationContainer>
 

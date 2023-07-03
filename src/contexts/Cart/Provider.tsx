@@ -21,6 +21,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
     return accumulator
   }, 0)
+  const valueOfItemsInCart = coffeeList?.reduce((accumulator, coffee) => {
+    return accumulator + coffee.price
+  }, 0)
 
   function addCoffeeToCart({ coffee, amount }: AddToCartData) {
     const newCoffeeToCart: Coffee = {
@@ -38,7 +41,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   return (
     <CartContext.Provider
-      value={{ coffeeList, totalCoffeeUnitsInCart, addCoffeeToCart }}
+      value={{
+        coffeeList,
+        totalCoffeeUnitsInCart,
+        valueOfItemsInCart,
+        addCoffeeToCart,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -4,6 +4,7 @@ import { CoffeeCounter } from '../../../../components/CoffeeCounter'
 import { Coffee } from '../../../../contexts/Cart/Context'
 import { useCart } from '../../../../contexts/Hooks/useCart'
 import { TagText, TextS, TitleM, TitleS } from '../../../../styles/typography'
+import { getFormattedPriceValueWithoutDollarSign } from '../../../../utils/getFormattedPriceValue'
 import {
   AddToCartButton,
   CartActions,
@@ -23,9 +24,6 @@ interface CoffeeCardProps {
 export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
   const { addCoffeeToCart } = useCart()
   const [amount, setAmount] = useState(1)
-  const [dollar, cents] = String(coffee.price).split('.')
-  const paddedCents = cents.padEnd(2, '0')
-  const formattedPrice = `${dollar},${paddedCents}`
 
   return (
     <CoffeeCardContainer>
@@ -50,7 +48,9 @@ export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
         <PriceAndCartActions>
           <Price>
             <TextS>R$</TextS>
-            <TitleM>{formattedPrice}</TitleM>
+            <TitleM>
+              {getFormattedPriceValueWithoutDollarSign(coffee.price)}
+            </TitleM>
           </Price>
 
           <CartActions>
