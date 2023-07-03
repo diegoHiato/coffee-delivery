@@ -1,4 +1,6 @@
+import { Fragment } from 'react'
 import { Divider } from '../../../../components/Divider'
+import { useCart } from '../../../../contexts/Hooks/useCart'
 import {
   ButtonLargeText,
   TextL,
@@ -15,13 +17,21 @@ import {
 } from './styles'
 
 export const CheckoutCart = () => {
+  const { coffeeList } = useCart()
+
   return (
     <CartContainer>
       <TitleXS>{'Cafés selecionados'}</TitleXS>
       <CartContent>
         <CoffeeListContainer>
-          <CartCoffee />
-          <Divider />
+          {coffeeList?.map((coffee) => {
+            return (
+              <Fragment key={coffee.id}>
+                <CartCoffee coffee={coffee} />
+                <Divider />
+              </Fragment>
+            )
+          })}
         </CoffeeListContainer>
 
         <PriceInformationContainer>

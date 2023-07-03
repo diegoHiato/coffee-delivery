@@ -1,17 +1,24 @@
 import { Trash } from 'phosphor-react'
 import { useState } from 'react'
-import CoffeeImage from '../../../../assets/menu/american.png'
 import { CoffeeCounter } from '../../../../components/CoffeeCounter'
+import { Coffee } from '../../../../contexts/Cart/Context'
 import { ButtonSmallText, TextM } from '../../../../styles/typography'
 import { CartCoffeeActions, CartCoffeeCardContainer } from './styles'
 
-export const CartCoffee = () => {
-  const [amount, setAmount] = useState(1)
+interface CartCoffeeProps {
+  coffee: Coffee
+}
+
+export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
+  const [amount, setAmount] = useState(coffee.amountInCart as number)
+  const [dollar, cents] = String(coffee.price).split('.')
+  const paddedCents = cents.padEnd(2, '0')
+  const formattedPrice = `${dollar},${paddedCents}`
 
   return (
     <CartCoffeeCardContainer>
       <section>
-        <img src={CoffeeImage} alt="" />
+        <img src={coffee.imageUrl} alt="" />
         <div>
           <TextM>{'Expresso Americano'}</TextM>
           <CartCoffeeActions>
@@ -28,7 +35,7 @@ export const CartCoffee = () => {
       </section>
 
       <section>
-        <TextM>{'R$ 9,90'}</TextM>
+        <TextM>{`R$ ${formattedPrice}`}</TextM>
       </section>
     </CartCoffeeCardContainer>
   )
