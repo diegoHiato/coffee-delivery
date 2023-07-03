@@ -2,7 +2,9 @@ import { Trash } from 'phosphor-react'
 import { useState } from 'react'
 import { CoffeeCounter } from '../../../../components/CoffeeCounter'
 import { Coffee } from '../../../../contexts/Cart/Context'
+import { useCart } from '../../../../contexts/Hooks/useCart'
 import { ButtonSmallText, TextM } from '../../../../styles/typography'
+import { getFormattedPriceValue } from '../../../../utils/getFormattedPriceValue'
 import { CartCoffeeActions, CartCoffeeCardContainer } from './styles'
 
 interface CartCoffeeProps {
@@ -10,10 +12,8 @@ interface CartCoffeeProps {
 }
 
 export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
+  const { removeCoffeeFromCart } = useCart()
   const [amount, setAmount] = useState(coffee.amountInCart as number)
-  const [dollar, cents] = String(coffee.price).split('.')
-  const paddedCents = cents.padEnd(2, '0')
-  const formattedPrice = `${dollar},${paddedCents}`
 
   return (
     <CartCoffeeCardContainer>
@@ -26,7 +26,11 @@ export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
               counter={amount}
               counterDispatchFunction={setAmount}
             />
-            <button>
+            <button
+              onClick={() => {
+                removeCoffeeFromCart(coffee.id)
+              }}
+            >
               <Trash size={16} />
               <ButtonSmallText>{'Remover'}</ButtonSmallText>
             </button>
@@ -35,7 +39,7 @@ export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
       </section>
 
       <section>
-        <TextM>{`R$ ${formattedPrice}`}</TextM>
+        <TextM>{getFormattedPriceValue(coffee.price)}</TextM>
       </section>
     </CartCoffeeCardContainer>
   )

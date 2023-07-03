@@ -20,6 +20,7 @@ interface CartContextType {
   totalCoffeeUnitsInCart: number
   valueOfItemsInCart: number
   addCoffeeToCart: ({ coffee, amount }: AddToCartData) => void
+  removeCoffeeFromCart: (id: Coffee['id']) => void
 }
 
 export const CartContext = createContext({} as CartContextType)

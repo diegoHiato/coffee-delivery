@@ -1,6 +1,7 @@
 import { ReactNode, useReducer } from 'react'
 import {
   addCoffeeToCartAction,
+  removeCoffeeFromCartAction,
   updateCurrentAmountAction,
 } from '../../reducers/cart/actions'
 import { cartReducer } from '../../reducers/cart/reducer'
@@ -39,6 +40,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
   }
 
+  function removeCoffeeFromCart(id: Coffee['id']) {
+    dispatch(removeCoffeeFromCartAction(id))
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -46,6 +51,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         totalCoffeeUnitsInCart,
         valueOfItemsInCart,
         addCoffeeToCart,
+        removeCoffeeFromCart,
       }}
     >
       {children}

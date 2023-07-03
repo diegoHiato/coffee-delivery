@@ -23,6 +23,14 @@ export function cartReducer(state: CartReducerState, action: any) {
           oldAmount + action.payload.coffeeToUpdate.amountInCart
       })
 
+    case CartReducerActionType.RemoveFromCart:
+      return produce(state, (draft) => {
+        const coffeeIndex = draft.coffeeList.findIndex(
+          (c) => c.id === action.payload.id,
+        )
+        if (coffeeIndex !== -1) draft.coffeeList.splice(coffeeIndex, 1)
+      })
+
     default:
       return state
   }
