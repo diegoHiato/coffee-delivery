@@ -15,13 +15,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     coffeeList: [],
   })
   const { coffeeList } = state
+  const totalCoffeeUnitsInCart = coffeeList?.reduce((accumulator, coffee) => {
+    if (coffee.amountInCart) {
+      return accumulator + coffee.amountInCart
+    }
+    return accumulator
+  }, 0)
 
   function addCoffeeToCart({ coffee, amount }: AddToCartData) {
     const newCoffeeToCart: Coffee = {
       ...coffee,
       amountInCart: amount,
     }
-    const coffeeAlreadyInCart = coffeeList.find((v) => v.id === coffee.id)
+    const coffeeAlreadyInCart = coffeeList.find((c) => c.id === coffee.id)
 
     if (coffeeAlreadyInCart) {
       dispatch(updateCurrentAmountAction(newCoffeeToCart))
@@ -31,7 +37,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   return (
-    <CartContext.Provider value={{ coffeeList, addCoffeeToCart }}>
+    <CartContext.Provider
+      value={{ coffeeList, totalCoffeeUnitsInCart, addCoffeeToCart }}
+    >
       {children}
     </CartContext.Provider>
   )

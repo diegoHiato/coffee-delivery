@@ -1,11 +1,14 @@
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { TextS } from '../../styles/typography'
 
-export const Location = styled.span`
+export const Location = styled(NavLink)`
   padding: 0.5rem;
 
   color: ${(props) => props.theme['purple-dark']};
   background-color: ${(props) => props.theme['purple-light']};
   border-radius: 6px;
+  text-decoration: none;
 
   display: flex;
   align-items: center;
@@ -14,6 +17,10 @@ export const Location = styled.span`
 
   & > svg {
     color: ${(props) => props.theme.purple};
+  }
+
+  & > ${TextS} {
+    color: ${(props) => props.theme['purple-dark']};
   }
 `
 

@@ -1,69 +1,13 @@
-/* eslint-disable no-unused-vars */
 import { MapPin, ShoppingCart } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { InternationalShoppingMapsLink } from '../../../envrionmentVariables'
 import Logo from '../../assets/full-logo.svg'
-import { openWeatherAPI } from '../../services/openWeatherAPI'
+import { useCart } from '../../contexts/Hooks/useCart'
+import { TextS } from '../../styles/typography'
 import { Actions, Cart, HeaderContainer, Location } from './styles'
 
-enum StateInitials {
-  Acre = 'AC',
-  Alagoas = 'AL',
-  Amapá = 'AP',
-  Amazonas = 'AM',
-  Bahia = 'BA',
-  Ceará = 'CE',
-  Distrito_Federal = 'DF',
-  Espírito_Santo = 'ES',
-  Goiás = 'GO',
-  Maranhão = 'MA',
-  Mato_Grosso = 'MT',
-  Mato_Grosso_do_Sul = 'MS',
-  Minas_Gerais = 'MG',
-  Pará = 'PA',
-  Paraíba = 'PB',
-  Paraná = 'PR',
-  Pernambuco = 'PE',
-  Piauí = 'PI',
-  Rio_de_Janeiro = 'RJ',
-  Rio_Grande_do_Norte = 'RN',
-  Rio_Grande_do_Sul = 'RS',
-  Rondônia = 'RO',
-  Roraima = 'RR',
-  Santa_Catarina = 'SC',
-  São_Paulo = 'SP',
-  Sergipe = 'SE',
-  Tocantins = 'TO',
-}
-
-interface OpenWeatherApiResponse {
-  country: string
-  name: string
-  state: string
-}
-
 export function Header() {
-  const [currentLocation, setCurrentLocation] = useState<string>('')
-
-  useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition((location) => {
-      const { latitude, longitude } = location.coords
-
-      openWeatherAPI
-        .get<OpenWeatherApiResponse[]>(
-          `reverse?lat=${latitude}&lon=${longitude}`,
-        )
-        .then(({ data }) =>
-          setCurrentLocation(
-            `${data[0].name}, ${
-              StateInitials[
-                data[0].state.replace(' ', '_') as keyof typeof StateInitials
-              ]
-            }`,
-          ),
-        )
-    })
-  }, [])
+  const { totalCoffeeUnitsInCart } = useCart()
 
   return (
     <HeaderContainer>
@@ -71,13 +15,23 @@ export function Header() {
         <img src={Logo} alt="Coffee Delivery" />
       </NavLink>
       <Actions>
-        <Location>
+        <Location
+          to={InternationalShoppingMapsLink}
+          target="__blank"
+          title="Localização"
+        >
           <MapPin weight="fill" size={22} />
-          {currentLocation}
+          <TextS>{'Guarulhos, SP'}</TextS>
         </Location>
         <NavLink to="/checkout" title="Carrinho">
           <Cart>
-            <span>{'3'}</span>
+            {totalCoffeeUnitsInCart > 0 && (
+              <span>
+                {totalCoffeeUnitsInCart > 0
+                  ? '9+'
+                  : `${totalCoffeeUnitsInCart}`}
+              </span>
+            )}
             <ShoppingCart weight="fill" size={22} />
           </Cart>
         </NavLink>
