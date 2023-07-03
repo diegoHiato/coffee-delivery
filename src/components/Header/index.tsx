@@ -27,7 +27,7 @@ export function Header() {
           <Cart>
             {totalCoffeeUnitsInCart > 0 && (
               <span>
-                {totalCoffeeUnitsInCart > 0
+                {totalCoffeeUnitsInCart > 9
                   ? '9+'
                   : `${totalCoffeeUnitsInCart}`}
               </span>
