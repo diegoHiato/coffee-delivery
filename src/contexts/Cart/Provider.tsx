@@ -2,7 +2,7 @@ import { ReactNode, useReducer } from 'react'
 import {
   addCoffeeToCartAction,
   removeCoffeeFromCartAction,
-  updateCurrentAmountAction,
+  updateAmountByOneAction,
 } from '../../reducers/cart/actions'
 import { cartReducer } from '../../reducers/cart/reducer'
 import { AddToCartData, CartContext, Coffee } from './Context'
@@ -31,13 +31,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       ...coffee,
       amountInCart: amount,
     }
-    const coffeeAlreadyInCart = coffeeList.find((c) => c.id === coffee.id)
+    dispatch(addCoffeeToCartAction(newCoffeeToCart))
+  }
 
-    if (coffeeAlreadyInCart) {
-      dispatch(updateCurrentAmountAction(newCoffeeToCart))
-    } else {
-      dispatch(addCoffeeToCartAction(newCoffeeToCart))
-    }
+  function updateCoffeeAmount(
+    id: Coffee['id'],
+    updateType: 'increase' | 'decrease',
+  ) {
+    dispatch(updateAmountByOneAction(id, updateType))
   }
 
   function removeCoffeeFromCart(id: Coffee['id']) {
@@ -52,6 +53,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         valueOfItemsInCart,
         addCoffeeToCart,
         removeCoffeeFromCart,
+        updateCoffeeAmount,
       }}
     >
       {children}

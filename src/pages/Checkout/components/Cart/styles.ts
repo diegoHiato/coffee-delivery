@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { CoffeeCounterContainer } from '../../../../components/CoffeeCounter/styles'
 import {
   ButtonLargeText,
   ButtonSmallText,
@@ -6,6 +7,8 @@ import {
   TextM,
   TextS,
 } from '../../../../styles/typography'
+
+export const Counter = styled(CoffeeCounterContainer)``
 
 export const CartCoffeeActions = styled.div`
   line-height: 0;
