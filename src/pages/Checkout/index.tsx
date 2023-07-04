@@ -1,6 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
+import { useCart } from '../../contexts/Hooks/useCart'
 import { CheckoutCart } from './components/Cart'
 import { CheckoutForm } from './components/Form'
 import { CheckoutContainer } from './styles'
@@ -24,14 +27,22 @@ const checkoutValidationSchema = zod.object({
 export type CheckoutFormData = zod.infer<typeof checkoutValidationSchema>
 
 export const Checkout = () => {
+  const { totalCoffeeUnitsInCart } = useCart()
   const checkoutForm = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutValidationSchema),
   })
+  const navigate = useNavigate()
   const checkoutFormMethods = checkoutForm
 
   function handleCheckout(data: CheckoutFormData) {
     console.log(data)
   }
+
+  useEffect(() => {
+    if (totalCoffeeUnitsInCart < 1) {
+      navigate('/')
+    }
+  }, [navigate, totalCoffeeUnitsInCart])
 
   return (
     <CheckoutContainer>
