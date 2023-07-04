@@ -3,6 +3,7 @@ import { Coffee } from '../../../../contexts/Cart/Context'
 import { useCart } from '../../../../contexts/Hooks/useCart'
 import { ButtonSmallText, TextM } from '../../../../styles/typography'
 import { getFormattedPriceValue } from '../../../../utils/getFormattedPriceValue'
+import { getValueByPriceTimesAmount } from '../../../../utils/getValueByPriceTimesAmount'
 import { CartCoffeeActions, CartCoffeeCardContainer, Counter } from './styles'
 
 interface CartCoffeeProps {
@@ -11,6 +12,10 @@ interface CartCoffeeProps {
 
 export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
   const { removeCoffeeFromCart, updateCoffeeAmount } = useCart()
+  const valueOfPriceTimesAmount = getValueByPriceTimesAmount(
+    coffee.price,
+    coffee.amountInCart as number,
+  )
 
   return (
     <CartCoffeeCardContainer>
@@ -54,7 +59,7 @@ export const CartCoffee = ({ coffee }: CartCoffeeProps) => {
       </section>
 
       <section>
-        <TextM>{getFormattedPriceValue(coffee.price)}</TextM>
+        <TextM>{getFormattedPriceValue(valueOfPriceTimesAmount)}</TextM>
       </section>
     </CartCoffeeCardContainer>
   )

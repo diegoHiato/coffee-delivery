@@ -5,6 +5,7 @@ import {
   updateAmountByOneAction,
 } from '../../reducers/cart/actions'
 import { cartReducer } from '../../reducers/cart/reducer'
+import { getValueByPriceTimesAmount } from '../../utils/getValueByPriceTimesAmount'
 import { AddToCartData, CartContext, Coffee } from './Context'
 
 interface CartProviderProps {
@@ -23,7 +24,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     return accumulator
   }, 0)
   const valueOfItemsInCart = coffeeList?.reduce((accumulator, coffee) => {
-    return accumulator + coffee.price
+    const valueOfPriceTimesAmount = getValueByPriceTimesAmount(
+      coffee.price,
+      coffee.amountInCart as number,
+    )
+    return accumulator + valueOfPriceTimesAmount
   }, 0)
 
   function addCoffeeToCart({ coffee, amount }: AddToCartData) {
