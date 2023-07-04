@@ -23,18 +23,19 @@ export function Header() {
           <MapPin weight="fill" size={22} />
           <TextS>{'Guarulhos, SP'}</TextS>
         </Location>
-        <NavLink to="/checkout" title="Carrinho">
-          <Cart>
-            {totalCoffeeUnitsInCart > 0 && (
-              <span>
-                {totalCoffeeUnitsInCart > 9
-                  ? '9+'
-                  : `${totalCoffeeUnitsInCart}`}
-              </span>
-            )}
-            <ShoppingCart weight="fill" size={22} />
-          </Cart>
-        </NavLink>
+
+        <Cart
+          to="/checkout"
+          title="Carrinho"
+          $disabled={totalCoffeeUnitsInCart < 1}
+        >
+          {totalCoffeeUnitsInCart > 0 && (
+            <span>
+              {totalCoffeeUnitsInCart > 9 ? '9+' : `${totalCoffeeUnitsInCart}`}
+            </span>
+          )}
+          <ShoppingCart weight="fill" size={22} />
+        </Cart>
       </Actions>
     </HeaderContainer>
   )

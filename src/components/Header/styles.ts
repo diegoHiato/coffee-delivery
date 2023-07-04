@@ -24,7 +24,7 @@ export const Location = styled(NavLink)`
   }
 `
 
-export const Cart = styled.button`
+export const Cart = styled(NavLink)<{ $disabled: boolean }>`
   position: relative;
   padding: 0.5rem;
 
@@ -37,7 +37,8 @@ export const Cart = styled.button`
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
+  cursor: ${(props) => (props.$disabled ? 'default' : 'pointer')};
+  pointer-events: ${(props) => props.$disabled && 'none'};
 
   & > span {
     position: absolute;
