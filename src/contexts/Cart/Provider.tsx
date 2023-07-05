@@ -39,7 +39,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       coffee.price,
       coffee.amountInCart as number,
     )
-    return accumulator + valueOfPriceTimesAmount
+    return Number((accumulator + valueOfPriceTimesAmount).toFixed(2))
   }, 0)
 
   function addCoffeeToCart({ coffee, amount }: AddToCartData) {
