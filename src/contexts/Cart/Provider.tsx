@@ -1,4 +1,4 @@
-import { ReactNode, useReducer } from 'react'
+import { ReactNode, useEffect, useReducer } from 'react'
 import {
   addCoffeeToCartAction,
   removeCoffeeFromCartAction,
@@ -13,9 +13,20 @@ interface CartProviderProps {
 }
 
 export const CartProvider = ({ children }: CartProviderProps) => {
-  const [state, dispatch] = useReducer(cartReducer, {
-    coffeeList: [],
-  })
+  const [state, dispatch] = useReducer(
+    cartReducer,
+    {
+      coffeeList: [],
+    },
+    (initialState) => {
+      const storedCart = localStorage.getItem('@COFFEE_DELIVERY:CART~1.0.0')
+      if (storedCart) {
+        const storedCartInJson = JSON.parse(storedCart)
+        return storedCartInJson
+      }
+      return initialState
+    },
+  )
   const { coffeeList } = state
   const totalCoffeeUnitsInCart = coffeeList?.reduce((accumulator, coffee) => {
     if (coffee.amountInCart) {
@@ -49,6 +60,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   function removeCoffeeFromCart(id: Coffee['id']) {
     dispatch(removeCoffeeFromCartAction(id))
   }
+
+  useEffect(() => {
+    const cartStateInJsonString = JSON.stringify(state)
+    localStorage.setItem('@COFFEE_DELIVERY:CART~1.0.0', cartStateInJsonString)
+  }, [state])
 
   return (
     <CartContext.Provider
