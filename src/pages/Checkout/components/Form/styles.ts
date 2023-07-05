@@ -80,6 +80,7 @@ export const CardTitleContainer = styled.div`
   & > div:last-of-type {
     & > ${TextM} {
       color: ${(props) => props.theme['base-subtitle']};
+      line-height: 130%;
     }
 
     & > ${TextS} {

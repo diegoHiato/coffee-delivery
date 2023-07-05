@@ -1,26 +1,36 @@
 import styled from 'styled-components'
 
 export const TitleXL = styled.h1`
+  font-family: 'Baloo 2', cursive;
+  line-height: 130%;
   font-size: 3rem;
   font-weight: 800;
 `
 
 export const TitleL = styled.h2`
+  font-family: 'Baloo 2', cursive;
+  line-height: 130%;
   font-size: 2rem;
   font-weight: 800;
 `
 
 export const TitleM = styled.h3`
+  font-family: 'Baloo 2', cursive;
+  line-height: 130%;
   font-size: 1.5rem;
   font-weight: 800;
 `
 
 export const TitleS = styled.h4`
+  font-family: 'Baloo 2', cursive;
+  line-height: 130%;
   font-size: 1.25rem;
   font-weight: 700;
 `
 
 export const TitleXS = styled.h5`
+  font-family: 'Baloo 2', cursive;
+  line-height: 130%;
   font-size: 1.125rem;
   font-weight: 700;
 `
