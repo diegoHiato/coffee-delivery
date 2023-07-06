@@ -58,6 +58,11 @@ export function cartReducer(state: CartReducerState, action: any) {
         if (coffeeIndex !== -1) draft.coffeeList.splice(coffeeIndex, 1)
       })
 
+    case CartReducerActionType.ClearCart:
+      return produce(state, (draft) => {
+        draft.coffeeList = []
+      })
+
     default:
       return state
   }

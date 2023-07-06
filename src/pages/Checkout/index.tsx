@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
+import { Buyer } from '../../contexts/Cart/Context'
 import { useCart } from '../../contexts/Hooks/useCart'
 import { CheckoutCart } from './components/Cart'
 import { CheckoutForm } from './components/Form'
@@ -27,7 +28,8 @@ const checkoutValidationSchema = zod.object({
 export type CheckoutFormData = zod.infer<typeof checkoutValidationSchema>
 
 export const Checkout = () => {
-  const { totalCoffeeUnitsInCart } = useCart()
+  const { totalCoffeeUnitsInCart, updateBuyerInformation, clearCart } =
+    useCart()
   const checkoutForm = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutValidationSchema),
   })
@@ -35,7 +37,26 @@ export const Checkout = () => {
   const checkoutFormMethods = checkoutForm
 
   function handleCheckout(data: CheckoutFormData) {
-    console.log(data)
+    const { address, paymentMethod } = data
+    const { cep, street, streetNumber, complement, neighborhood, city, state } =
+      address
+
+    updateBuyerInformation({
+      address: {
+        cep,
+        street,
+        streetNumber,
+        complement,
+        neighborhood,
+        city,
+        state,
+        country: 'BR',
+      },
+      paymentMethod: paymentMethod as Buyer['paymentMethod'],
+    })
+
+    clearCart()
+    navigate('/checkout/success')
   }
 
   useEffect(() => {

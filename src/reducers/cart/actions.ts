@@ -5,6 +5,7 @@ export enum CartReducerActionType {
   AddToCart = 'ADD_COFFEE_TO_CART',
   UpdateAmount = 'UPDATE_CURRENT_AMOUNT_BY_ONE',
   RemoveFromCart = 'REMOVE_COFFEE_FROM_CART',
+  ClearCart = 'CLEAR_CART',
 }
 
 export function addCoffeeToCartAction(coffeeToAdd: Coffee) {
@@ -30,5 +31,11 @@ export function removeCoffeeFromCartAction(id: Coffee['id']) {
   return {
     type: CartReducerActionType.RemoveFromCart,
     payload: { id },
+  }
+}
+
+export function clearCartAction() {
+  return {
+    type: CartReducerActionType.ClearCart,
   }
 }

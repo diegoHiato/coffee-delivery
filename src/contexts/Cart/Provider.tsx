@@ -1,12 +1,13 @@
-import { ReactNode, useEffect, useReducer } from 'react'
+import { ReactNode, useEffect, useReducer, useState } from 'react'
 import {
   addCoffeeToCartAction,
+  clearCartAction,
   removeCoffeeFromCartAction,
   updateAmountByOneAction,
 } from '../../reducers/cart/actions'
 import { cartReducer } from '../../reducers/cart/reducer'
 import { getValueByPriceTimesAmount } from '../../utils/getValueByPriceTimesAmount'
-import { AddToCartData, CartContext, Coffee } from './Context'
+import { AddToCartData, Buyer, CartContext, Coffee } from './Context'
 
 interface CartProviderProps {
   children: ReactNode
@@ -27,6 +28,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return initialState
     },
   )
+  const [buyerInformation, setBuyerInformation] = useState<Buyer>({
+    address: {
+      cep: '',
+      street: '',
+      streetNumber: '',
+      neighborhood: '',
+      city: '',
+      state: '',
+      country: 'BR',
+    },
+    paymentMethod: undefined,
+  })
+
   const { coffeeList } = state
   const totalCoffeeUnitsInCart = coffeeList?.reduce((accumulator, coffee) => {
     if (coffee.amountInCart) {
@@ -61,6 +75,29 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     dispatch(removeCoffeeFromCartAction(id))
   }
 
+  function clearCart() {
+    dispatch(clearCartAction())
+  }
+
+  function updateBuyerInformation(data: Buyer) {
+    setBuyerInformation(data)
+  }
+
+  function clearBuyerInformation() {
+    setBuyerInformation({
+      address: {
+        cep: '',
+        street: '',
+        streetNumber: '',
+        neighborhood: '',
+        city: '',
+        state: '',
+        country: 'BR',
+      },
+      paymentMethod: undefined,
+    })
+  }
+
   useEffect(() => {
     const cartStateInJsonString = JSON.stringify(state)
     localStorage.setItem('@COFFEE_DELIVERY:CART~1.0.0', cartStateInJsonString)
@@ -69,12 +106,16 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   return (
     <CartContext.Provider
       value={{
+        buyerInformation,
+        updateBuyerInformation,
+        clearBuyerInformation,
         coffeeList,
         totalCoffeeUnitsInCart,
         valueOfItemsInCart,
         addCoffeeToCart,
         removeCoffeeFromCart,
         updateCoffeeAmount,
+        clearCart,
       }}
     >
       {children}
