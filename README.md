@@ -1,4 +1,4 @@
-# coffee-delivery
+# Coffee Delivery
 
 Projeto realizado como desafio complementar do Módulo 2 do curso Ignite, ministrado pelo Diego Fernandes [@Rocketseat](https://www.rocketseat.com.br/).
 Esse projeto tem como objeto testar o conhecimento adquirido durante o módulo. O qual, foram tratados assuntos como:
