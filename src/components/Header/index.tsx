@@ -1,6 +1,5 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
-import { InternationalShoppingMapsLink } from '../../../envrionmentVariables'
 import Logo from '../../assets/full-logo.svg'
 import { useCart } from '../../contexts/Hooks/useCart'
 import { TextS } from '../../styles/typography'
@@ -16,7 +15,7 @@ export function Header() {
       </NavLink>
       <Actions>
         <Location
-          to={InternationalShoppingMapsLink}
+          to={import.meta.env.VITE_VITE_VITE_HYGRAPH_CONTENT_API_KEY}
           target="__blank"
           title="Localização"
         >

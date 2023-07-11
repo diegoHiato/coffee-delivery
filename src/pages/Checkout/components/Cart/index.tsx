@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { freightBaseCost } from '../../../../../envrionmentVariables'
 import { Divider } from '../../../../components/Divider'
 import { useCart } from '../../../../contexts/Hooks/useCart'
 import {
@@ -20,6 +19,7 @@ import {
 
 export const CheckoutCart = () => {
   const { coffeeList, valueOfItemsInCart } = useCart()
+  const freightBaseCost = Number(import.meta.env.VITE_FREIGHT_BASE_COST)
   const totalCartValue = freightBaseCost + valueOfItemsInCart
 
   return (

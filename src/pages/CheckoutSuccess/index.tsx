@@ -1,6 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useEffect, useState } from 'react'
-import { shopLocationLatitude, shopLocationLongitude } from '../../../envrionmentVariables'
 import { RoundedIcon } from '../../components/RoundedIcon'
 import { useCart } from '../../contexts/Hooks/useCart'
 import { geocodingApi } from '../../services/freeGeocodingAPI'
@@ -59,7 +58,10 @@ export const CheckoutSuccess = () => {
       latitude: userGeolocation.latitude as number,
       longitude: userGeolocation.longitude as number,
     },
-    { latitude: shopLocationLatitude, longitude: shopLocationLongitude},
+    { 
+      latitude: Number(import.meta.env.VITE_COFFEE_SHOP_LOCATION_LATITUDE),
+      longitude: Number(import.meta.env.VITE_COFFEE_SHOP_LOCATION_LONGITUDE)
+    },
   )
 
   const estimatedTime = getEstimatedTimeForDeliver(distanceInKilometers, AVERAGE_PREPARATION_TIME, AVERAGE_SPEED)

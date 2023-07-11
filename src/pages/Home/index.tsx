@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { Provider, gql, useQuery } from 'urql'
 import { Coffee } from '../../contexts/Cart/Context'
-import { useCart } from '../../contexts/Hooks/useCart'
 import { client } from '../../lib/urql'
 import { TitleL } from '../../styles/typography'
 import { CoffeeCard } from './components/CoffeeCard'
@@ -26,15 +24,10 @@ interface queryResultType {
 }
 
 export function Home() {
-  const { clearBuyerInformation } = useCart()
   const [result] = useQuery<queryResultType>({
     query: CoffeeQuery,
   })
   const { data } = result
-
-  useEffect(() => {
-    clearBuyerInformation()
-  }, [clearBuyerInformation])
 
   return (
     <Provider value={client}>

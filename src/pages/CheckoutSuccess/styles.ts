@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { CheckoutSuccessHeroImageUrl } from '../../../envrionmentVariables'
 import { TextM, TitleL } from '../../styles/typography'
 
 export const CheckoutSuccessHeroImage = styled.div`
   height: 100vh;
   max-height: 293px;
-  background: url(${CheckoutSuccessHeroImageUrl}) 0 0 no-repeat;
+  background: url(${import.meta.env.VITE_CHECKOUT_SUCCESS_HERO_IMAGE_URL}) 0 0
+    no-repeat;
   background-size: contain;
   background-position: center;
 `

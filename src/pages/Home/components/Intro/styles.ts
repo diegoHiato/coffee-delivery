@@ -1,8 +1,4 @@
 import styled from 'styled-components'
-import {
-  IntroBackgroundImageUrl,
-  IntroHeroImageUrl,
-} from '../../../../../envrionmentVariables'
 import { TextL, TextM, TitleXL } from '../../../../styles/typography'
 
 export const Background = styled.div`
@@ -11,7 +7,7 @@ export const Background = styled.div`
   height: 100%;
 
   filter: blur(80px);
-  background-image: url(${IntroBackgroundImageUrl});
+  background-image: url(${import.meta.env.VITE_INTRO_BACKGROUND_IMAGE_URL});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -58,7 +54,7 @@ export const HeroImage = styled.section`
   width: 29.75rem;
   height: 22.5rem;
 
-  background-image: url(${IntroHeroImageUrl});
+  background-image: url(${import.meta.env.VITE_INTRO_HERO_IMAGE_URL});
   background-size: contain;
   background-repeat: no-repeat;
 `
