@@ -44,7 +44,7 @@ Os estilos foram criados utilizando a biblioteca [Styled Components](https://www
 [Free Geocoding API](https://geocode.maps.co)  
 
 ## Problemáticas e Considerações
-- Como bom inquieto que sou, não consegui fazer apenas o que foi proposto, quis ir alguns níveis acima para testar alguns conhecimentos que estavam armazenados no meu baú. Há tempos queria fazer uma aplicação Serverless mas não queria parar meus estudos para focar em fazer uma aplicação, então foi nesse desafio que achei a oportunidade perfeita para que pudesse fazer.
+- Como bom inquieto que sou, não consegui fazer apenas o que foi proposto, quis ir alguns níveis acima para testar alguns conhecimentos que estavam armazenados no meu baú. Acabei criando um App utilizando a estrutura Jamstack.
 - Como já era de conhecimento, acabei utilizando o CMS disponiblizado pela Hygraph - [GraphCMS](https://app.hygraph.com/). Devo dizer que a experiência foi a melhor possível, o serviço é bem documentado, fácil uso e implementação.
 - Não queria deixar a página de sucesso no Checkout com dados estáticos, então achei uma forma de calcular, de modo fictício, porém usando localizações reais, o tempo estimado para a entrega do café. Com certeza tem algum serviço que possibilita um cálculo real, mas para esse caso, está suficiente um cálculo utilizando Movimento Retilíneo Uniforme. P.S.: boa sorte ao cliente que receber um café em que o entregador faz uma curva na mesma velocidade em que anda nas retas.
 - Fica aqui de registro que, quem sabe, em algum futuro eu aplique algumas atualizações de performance e acessibilidade, esses foram dois fatores que pesam bastante no uso de uma aplicação e que não foram trabalhadas.
