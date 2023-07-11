@@ -15,7 +15,7 @@ export function Header() {
       </NavLink>
       <Actions>
         <Location
-          to={import.meta.env.VITE_HYGRAPH_CONTENT_API_KEY}
+          to={import.meta.env.VITE_COFFEE_SHOP_LOCATION_URL}
           target="__blank"
           title="Localização"
         >
