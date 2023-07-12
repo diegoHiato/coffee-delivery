@@ -3,6 +3,16 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diegoHiato/coffee-delivery.git"
+  },
+  "author": {
+    "name": "Diego de Oliveira Freitas",
+    "email": "diegofreitas_oliveira@proton.me",
+    "url": "https://www.linkedin.com/in/diegoHiato/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
